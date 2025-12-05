@@ -1,0 +1,295 @@
+
+
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={John Doe's CV},
+    pdfauthor={John Doe},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    % \usepackage[T1]{fontenc} % this breaks sb2nov
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+
+% Some settings:
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain % Copy the plain style to customFooterStyle
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+\begin{document}
+    \newcommand{\AND}{\unskip\cleaders\copy\ANDbox\hskip\wd\ANDbox\ignorespaces}
+    \newsavebox\ANDbox
+    \sbox\ANDbox{}
+
+%------------HEADER-------------
+
+    \placelastupdatedtext
+    \begin{header}
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont SIVA KUMAR YADAV MEDABOINA}
+        \vspace{0.2 cm}
+
+        \normalsize
+        \mbox{\hrefWithoutArrow{mailto:skumaryadav489@gmail.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}skumaryadav489@gmail.com}}%
+        \kern 0.25 cm%
+        \AND%
+        \kern 0.25 cm%
+        \mbox{\hrefWithoutArrow{tel:+91 9133865154}{\color{black}{\footnotesize\faPhone*}\hspace*{0.13cm}9133865154}}%
+        
+        
+        
+    \end{header}
+    \vspace{0.3 cm - 0.3 cm}
+
+    \section{Professional Summary}
+      \begin{onecolentry}
+      Passionate Computer Science graduate with hands-on internship experience in **full-stack web application development** utilizing the **MERN stack**, **Next.js**, and **TypeScript**. Adept at building **scalable solutions** and **RESTful APIs**, and skilled in developing **user-friendly, responsive interfaces**. Seeking an **Entry-Level Full Stack Developer** role to contribute to innovative projects and thrive in a **collaborative environment**.
+      \end{onecolentry}
+    
+  %------------EDUCATION--------------
+          
+    \section{Education}
+    \begin{twocolentry}{   
+        \textit{2019-08 – 2023-06}}
+          \textbf{Marri Lakshman Reddy Institute Of Technology}
+    
+        \textit{BTech - [GPA: 6.8/10] }
+      \end{twocolentry}
+\begin{twocolentry}{   
+        \textit{2017-06 – 2019-03}}
+          \textbf{Sri Chaitanya Junior College}
+    
+        \textit{MPC - [GPA: 9/10] }
+      \end{twocolentry}
+\begin{twocolentry}{   
+        \textit{2016-06 – 2017-04}}
+          \textbf{Nava Jyothi High School}
+    
+        \textit{SSC - [GPA: 8.8/10] }
+      \end{twocolentry}
+    
+  %------------EXPERIENCE--------------
+    
+        \section{Work Experience}
+          
+            \begin{twocolentry}{  
+              \textit{2025-07 - Present}}
+                \textbf{SDE Intern} - \textit{[Codedale]}
+            \end{twocolentry} 
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                
+                \item {Contributed to **full-stack web application development**, creating **responsive frontend interfaces** with **Next.js, TypeScript, and Tailwind CSS** and managing backend logic using **Next.js server actions** for efficient data handling and **seamless data management**.}
+    \item {Implemented reusable UI components and **responsive layouts** to enhance user experience. **Collaborated effectively with teammates** to **integrate front-end and back-end systems**, ensuring smooth workflows and clean code practices.}
+              \end{highlights}
+            \end{onecolentry}
+
+            \begin{twocolentry}{  
+              \textit{2023-01 - 2023-04}}
+                \textbf{Software Intern} - \textit{[Virtusa]}
+            \end{twocolentry} 
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                
+                \item {Developed and maintained data integration workflows using Talend ETL tools.}
+    \item {**Collaborated with cross-functional teams** to gather and analyze data requirements, performing data validation, file validation, and transformations.}
+              \end{highlights}
+            \end{onecolentry}
+    
+  %------------PROJECTS--------------
+    
+        \section{Projects}
+            
+              \begin{twocolentry}{    
+            \textit{\href{Live Demo 2}{Link}}}
+              \textbf{\textbf{AI Proposal Generator & Chatbot}}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                \item {Developed a **full-stack AI-powered tool** using **React.js, Node.js, and Express.js** to generate software project proposals with a chatbot interface. Implemented robust **RESTful APIs** for exporting to PDF via **PDFKit** and sharing through email via **Nodemailer**, showcasing proficiency in **third-party integrations** and API design.}
+                \item  \textbf{Technologies:} React.js,Node.js,Express.js,Gemini SDK,PDFKit,Nodemailer,Tailwind CSS 
+              \end{highlights}
+            \end{onecolentry}
+
+              \begin{twocolentry}{    
+            \textit{\href{Live Demo 2}{Link}}}
+              \textbf{\textbf{Staysphere (Airbnb clone)}}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                \item {Engineered a **full-stack Airbnb clone** leveraging **Node.js, Express.js, and MongoDB Atlas**, implementing secure user authentication with **Passport.js (JWT authentication)**. Features included property listings, user reviews, and efficient image uploads utilizing **Multer and Cloudinary**, demonstrating comprehensive **full-stack development** and **third-party integrations**.}
+                \item  \textbf{Technologies:} Node.js,Express.js,MongoDB Atlas,Passport.js,Cloudinary,Multer,EJS,Bootstrap 
+              \end{highlights}
+            \end{onecolentry}
+
+              \begin{twocolentry}{    
+            \textit{\href{Live Demo 2}{Link}}}
+              \textbf{\textbf{BookMyShow Clone}}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                \item {Built a basic ticket booking clone during a 1-day hackathon, utilizing the **MERN stack** components **Node.js, Express.js, and React.js** with **Tailwind CSS**, demonstrating rapid **full-stack development** and proficiency in core web technologies.}
+                \item  \textbf{Technologies:} Node,Express,React,Tailwind CSS 
+              \end{highlights}
+            \end{onecolentry}
+
+              \begin{twocolentry}{    
+            \textit{\href{Live Demo 2}{Link}}}
+              \textbf{\textbf{Frontend Showcases}}
+            \end{twocolentry}
+            \vspace{0.10 cm}
+    
+            \begin{onecolentry}
+              \begin{highlights}
+                \item {Developed and showcased multiple cloned websites to demonstrate strong **frontend expertise**, focusing on clean design patterns, reusable components, structured routing, and smooth animations using **Next.js, TypeScript, and Tailwind CSS**, emphasizing **responsive design principles**.}
+                \item  \textbf{Technologies:} Next.js,TypeScript,Tailwind CSS,Motion.dev 
+              \end{highlights}
+            \end{onecolentry}
+      
+  %------------SKILLS--------------
+    
+        \section{Skills}
+          \begin{onecolentry}
+          \begin{highlights}
+            
+            \item \textbf{Technical}{: JavaScript (ES6+), React.js, Node.js, Express.js, MongoDB, MySQL, Next.js, TypeScript, HTML, CSS, TailwindCSS, Bootstrap, Java }
+            \item \textbf{Tools}{: Git, Github, Passport.js, Cloudinary, Multer, PDFKit, Nodemailer, Gemini SDK, Talend ETL, Motion.dev } 
+             
+            \end{highlights}
+          \end{onecolentry}
+    
+  %------------CERTIFICATIONS--------------
+    
+    
+    
+  %------------AWARDS--------------
+    
+    
+    
+  %------------PUBLICATIONS--------------
+    
+    
+
+\end{document}
